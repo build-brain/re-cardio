@@ -1,0 +1,13 @@
+.idea
+.vscode
+venv
+data
+conf
+*/__pycache__
+*/*/__pycache__
+*/migrations/*
+!*/migrations/__init__.py
+*.sqlite3
+*.backup
+*.sql
+*.env
