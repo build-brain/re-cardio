@@ -4,10 +4,11 @@ from .views import *
 
 router = DefaultRouter()
 
-# router.register(r'user', UserViewSet)
-# router.register(r'admin', AdminViewSet)
-# router.register(r'provider', ProviderViewSet)
-# router.register(r'employee', EmployeeViewSet)
-# router.register(r'company', CompanyViewSet)
-# router.register(r'company-worker', CompanyWorkerViewSet)
-# router.register(r'customer', CustomerViewSet)
+router.register(r'users', UserViewSet)
+router.register(r'admins', AdminViewSet)
+router.register(r'doctors', DoctorViewSet)
+router.register(r'patients', PatientViewSet)
+router.register(r'icd', InternationalClassificationOfDiseasesViewSet)
+router.register(r'admission_data', AdmissionDataViewSet)
+router.register(r'districts', DistrictViewSet)
+router.register(r'regions', RegionViewSet)
