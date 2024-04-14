@@ -28,6 +28,7 @@ class User(AbstractUser, PermissionsMixin):
     pinfl = models.CharField(verbose_name=_("PINFL"), max_length=14)
     passport = models.CharField(verbose_name=_("Passport serial and number"), max_length=9, null=True, blank=True)
     passport_attachment = models.FileField(verbose_name=_("Passport attachment"), upload_to=get_passport_path, null=True, blank=True)
+    additional_information = models.TextField(verbose_name=_("Additional information"), null=True, blank=True)
 
     verify_code = models.PositiveSmallIntegerField(verbose_name=_("Verify Code"), default=0)
     verify_time = models.DateTimeField(verbose_name=_("Verify Time"), default=timezone.now)
@@ -144,6 +145,8 @@ class Patient(User):
     ethnicity = models.CharField(verbose_name=_("Ethnicity"), max_length=15, choices=EthnicityChoices.choices, null=True,blank=True)
     social_group = models.CharField(verbose_name=_("Social group"), max_length=20, choices=SocialGroupChoices.choices, null=True, blank=True)
     profession = models.CharField(verbose_name=_("Profession"), max_length=20, choices=ProfessionChoices.choices, null=True, blank=True)
+    
+    demographic_additional = models.TextField(verbose_name=_("Demographic additional information"), null=True, blank=True)
 
     # <-----Contact data-----> #
     
@@ -163,7 +166,6 @@ class Patient(User):
     latitude = models.DecimalField(verbose_name=_("Latitude"), max_digits=40, decimal_places=20, null=True, blank=True)
     longitude = models.DecimalField(verbose_name=_("Longitude"), max_digits=40, decimal_places=20, null=True, blank=True)
 
-    additional_information = models.TextField(verbose_name=_("Additional information"), null=True, blank=True)
 
 
     class Meta:
