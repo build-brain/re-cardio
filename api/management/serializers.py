@@ -69,12 +69,12 @@ class PatientSerializer(serializers.ModelSerializer):
     """ """
 
     class Meta(UserSerializer.Meta):
-        model = Doctor
+        model = Patient
 
 
 class MePatientSerializer(AdminSerializer):
     class Meta(ProfileMeta):
-        model = Doctor
+        model = Patient
         read_only_fields = ProfileMeta.read_only_fields
         
 
