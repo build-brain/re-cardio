@@ -1,6 +1,6 @@
 from rest_framework import viewsets
 
-from ca_sheet.models import *
+from src.ca_sheet.models import *
 from .serializers import *
 
 class MedicationGroupViewSet(viewsets.ModelViewSet):

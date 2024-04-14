@@ -4,4 +4,6 @@ from .views import *
 
 router = DefaultRouter()
 
-router.register(r'er_cards', ElectronicRehabilitationCardViewSet)
+router.register(r'er_card', ElectronicRehabilitationCardViewSet)
+router.register(r'icd', InternationalClassificationOfDiseasesViewSet)
+router.register(r'admission_data', AdmissionDataViewSet)

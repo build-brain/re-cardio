@@ -2,7 +2,7 @@ from django.utils.translation import gettext_lazy as _
 
 from rest_framework import serializers
 
-from management.models import *
+from src.management.models import *
 
 
 class ProfileMeta:
@@ -78,27 +78,17 @@ class MePatientSerializer(AdminSerializer):
         read_only_fields = ProfileMeta.read_only_fields
         
 
-class InternationalClassificationOfDiseasesSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = InternationalClassificationOfDiseases
-        fields = '__all__'
+# class AttachedFileSerializer(serializers.ModelSerializer):
+#     class Meta:
+#         model = AttachedFile
+#         fields = '__all__'
 
-class AttachedFileSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = AttachedFile
-        fields = '__all__'
-
-class AdmissionDataSerializer(serializers.ModelSerializer):
-    preliminary_diagnosis = InternationalClassificationOfDiseasesSerializer()
-
-    class Meta:
-        model = AdmissionData
-        fields = '__all__'
 
 class DistrictSerializer(serializers.ModelSerializer):
     class Meta:
         model = District
         fields = '__all__'
+
 
 class RegionSerializer(serializers.ModelSerializer):
     district = DistrictSerializer()

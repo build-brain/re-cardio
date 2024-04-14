@@ -6,6 +6,7 @@ from rest_framework.decorators import action
 from rest_framework.response import Response
 
 from .serializers import *
+from src.management.models import *
 
 
 class UserViewSet(viewsets.ModelViewSet):
@@ -161,10 +162,6 @@ class UserViewSet(viewsets.ModelViewSet):
         except ObjectDoesNotExist:
             return Response({"message": _("The user with this phone has not been found!")}, status.HTTP_404_NOT_FOUND)
 
-    @action(url_path="monitoring", detail=False, methods=["GET"])
-    def monitoring(self, request):
-        return super().list(request)
-
 
 class AdminViewSet(viewsets.ModelViewSet):
     """ """
@@ -194,19 +191,9 @@ class PatientViewSet(viewsets.ModelViewSet):
     serializer_class = PatientSerializer
 
 
-class InternationalClassificationOfDiseasesViewSet(viewsets.ModelViewSet):
-    queryset = InternationalClassificationOfDiseases.objects.all()
-    serializer_class = InternationalClassificationOfDiseasesSerializer
-
-
-class AttachedFileViewSet(viewsets.ModelViewSet):
-    queryset = AttachedFile.objects.all()
-    serializer_class = AttachedFileSerializer
-
-
-class AdmissionDataViewSet(viewsets.ModelViewSet):
-    queryset = AdmissionData.objects.all()
-    serializer_class = AdmissionDataSerializer
+# class AttachedFileViewSet(viewsets.ModelViewSet):
+#     queryset = AttachedFile.objects.all()
+#     serializer_class = AttachedFileSerializer
 
 
 class DistrictViewSet(viewsets.ModelViewSet):

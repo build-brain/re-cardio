@@ -10,7 +10,7 @@ from rest_framework_simplejwt.tokens import Token
 from rest_framework_simplejwt.exceptions import AuthenticationFailed, InvalidToken
 from rest_framework_simplejwt.utils import get_md5_hash_password
 
-from management.models import Admin, Doctor, Patient
+from src.management.models import Admin, Doctor, Patient
 
 
 class DevAuthentication(SessionAuthentication):

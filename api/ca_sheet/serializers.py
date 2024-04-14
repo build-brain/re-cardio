@@ -2,7 +2,7 @@ from django.utils.translation import gettext_lazy as _
 
 from rest_framework import serializers
 
-from ca_sheet.models import *
+from src.ca_sheet.models import *
 
 
 class MedicationGroupSerializer(serializers.ModelSerializer):
