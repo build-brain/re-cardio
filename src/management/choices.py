@@ -39,7 +39,7 @@ class SocialGroupChoices(models.TextChoices):
     # Пенсионеры, мужчины >59 лет, женщины >54 лет
     PENSIONERS = 'pensioner', _('Pensioner')
     # Прочие, любого возраста
-    OTHER = 'other', _('Other')
+    DISABLED = 'disabled', _('Disabled')
 
 
 class ProfessionChoices(models.TextChoices):
