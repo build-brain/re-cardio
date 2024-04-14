@@ -189,6 +189,21 @@ class PatientViewSet(viewsets.ModelViewSet):
 
     queryset = Patient.objects.all()
     serializer_class = PatientSerializer
+    search_fields = [
+        'last_name', 
+        'first_name', 
+        'middle_name',
+        'pinfl', 
+        'phone', 
+        'mahalla', 
+        'street',    
+    ]
+    filterset_fields = [
+        'birth_date', 
+        'social_group', 
+        'gender', 
+        'district'
+    ]
 
 
 # class AttachedFileViewSet(viewsets.ModelViewSet):

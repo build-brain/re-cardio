@@ -163,6 +163,8 @@ class Patient(User):
     latitude = models.DecimalField(verbose_name=_("Latitude"), max_digits=40, decimal_places=20, null=True, blank=True)
     longitude = models.DecimalField(verbose_name=_("Longitude"), max_digits=40, decimal_places=20, null=True, blank=True)
 
+    additional_information = models.TextField(verbose_name=_("Additional information"), null=True, blank=True)
+
 
     class Meta:
         db_table = "patient"

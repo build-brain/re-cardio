@@ -15,7 +15,7 @@ class UserSerializer(serializers.ModelSerializer):
 
     class Meta(ProfileMeta):
         model = User
-        read_only_fields = ProfileMeta.read_only_fields + ["avatar"]
+        read_only_fields = ProfileMeta.read_only_fields
 
 
 class ChangeAvatarSerializer(serializers.Serializer):
