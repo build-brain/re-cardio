@@ -206,7 +206,7 @@ FILE_UPLOAD_TEMP_DIR = BASE_DIR
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # SMS code verify
-VERIFY_CODE_MINUTES = getattr(settings, 'VERIFY_CODE_MINUTES', 5)
+VERIFY_CODE_MINUTES = getattr(settings, 'VERIFY_CODE_MINUTES', 1440)
 
 # REDIS related settings
 REDIS_HOST = getattr(settings, 'REDIS_HOST', '127.0.0.1')
