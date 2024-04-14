@@ -182,3 +182,18 @@ class District(models.Model):
 
     def __str__(self):
         return self.name
+
+
+# class Region(models.Model):
+
+#     """Region model"""
+
+#     name = models.CharField(verbose_name=_("Region"), max_length=100)
+#     district = models.ForeignKey(verbose_name=_("District"), to=District, on_delete=models.CASCADE, related_name='regions')
+
+#     class Meta:
+#         verbose_name = _("Region")
+#         verbose_name_plural = _("Regions")
+
+#     def __str__(self):
+#         return self.name

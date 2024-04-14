@@ -22,9 +22,9 @@ class PatientAdmin(admin.ModelAdmin):
 # class AttachedFileAdmin(admin.ModelAdmin):
 #     pass
 
-@admin.register(Region)
-class RegionAdmin(admin.ModelAdmin):
-    pass
+# @admin.register(Region)
+# class RegionAdmin(admin.ModelAdmin):
+#     pass
 
 @admin.register(District)
 class DistrictAdmin(admin.ModelAdmin):

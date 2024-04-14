@@ -201,9 +201,9 @@ class DistrictViewSet(viewsets.ModelViewSet):
     serializer_class = DistrictSerializer
 
 
-class RegionViewSet(viewsets.ModelViewSet):
-    queryset = Region.objects.all()
-    serializer_class = RegionSerializer
+# class RegionViewSet(viewsets.ModelViewSet):
+#     queryset = Region.objects.all()
+#     serializer_class = RegionSerializer
 
 
         
