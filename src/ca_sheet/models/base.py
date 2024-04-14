@@ -75,7 +75,8 @@ class GraceScale(models.Model):
     score_range_start = models.PositiveIntegerField(verbose_name=_('Score range start'), null=True, blank=True)
     score_range_end = models.PositiveIntegerField(verbose_name=_('Score range end'), null=True, blank=True)
     risk = models.CharField(verbose_name=_('Risk'), max_length=15, choices=RiskChoices.choices)
-    lethality = models.FloatField()
+    lethality_start = models.FloatField(verbose_name=_('Lethality percentage start'), null=True, blank=True)
+    lethality_end = models.FloatField(verbose_name=_('Lethality percentage end'), null=True, blank=True)
 
     class Meta:
         verbose_name = 'GRACE Scale'

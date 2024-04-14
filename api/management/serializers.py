@@ -59,7 +59,7 @@ class DoctorSerializer(serializers.ModelSerializer):
         model = Doctor
 
 
-class MeDoctorSerializer(AdminSerializer):
+class MeDoctorSerializer(DoctorSerializer):
     class Meta(ProfileMeta):
         model = Doctor
         read_only_fields = ProfileMeta.read_only_fields
@@ -72,7 +72,7 @@ class PatientSerializer(serializers.ModelSerializer):
         model = Patient
 
 
-class MePatientSerializer(AdminSerializer):
+class MePatientSerializer(PatientSerializer):
     class Meta(ProfileMeta):
         model = Patient
         read_only_fields = ProfileMeta.read_only_fields

@@ -14,7 +14,10 @@ class ElectronicRehabilitationCardViewSet(viewsets.ModelViewSet):
 
 
 class AdmissionDataViewSet(viewsets.ModelViewSet):
-    queryset = AdmissionData.objects.all()
+    queryset = AdmissionData.objects.all().\
+        select_related('patient')\
+            .select_related('preliminary_diagnosis')\
+                .prefetch_related('attachments')
     serializer_class = AdmissionDataSerializer
 
     @swagger_auto_schema(method='post', request_body=AttachedFileSerializer)    

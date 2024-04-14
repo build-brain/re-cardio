@@ -13,7 +13,6 @@ class ElectronicRehabilitationCard(models.Model):
     patient = models.ForeignKey(verbose_name=_("Patient"), to=Patient, on_delete=models.CASCADE)
     admission_data = models.ForeignKey(verbose_name=_("Admission data"), to="AdmissionData", on_delete=models.SET_NULL, related_name='er_cards', null=True)
     doctor = models.ForeignKey(verbose_name=_("Created doctor"), to=Doctor, on_delete=models.SET_NULL, related_name='er_cards', null=True)
-    admission_data = models.ForeignKey(verbose_name=_("Admission data"), to="AdmissionData", on_delete=models.SET_NULL, related_name='er_cards', null=True)    
     
     is_active = models.BooleanField(verbose_name=_("Is active"), default=True)
     created_at = models.DateTimeField(verbose_name=_("Create date"), auto_now_add=True)
