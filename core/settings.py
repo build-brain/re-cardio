@@ -119,14 +119,14 @@ REST_FRAMEWORK = {
     ],
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'core.authentication.DevAuthentication',
-        'rest_framework_simplejwt.authentication.JWTAuthentication',
-        # 'core.authentication.TokenAuthentication',
+        'core.authentication.TokenAuthentication',
+        # 'rest_framework_simplejwt.authentication.JWTAuthentication',
     ],
     'COERCE_DECIMAL_TO_STRING': False
 }
 
 SIMPLE_JWT = {
-    "ACCESS_TOKEN_LIFETIME": timezone.timedelta(minutes=5),
+    "ACCESS_TOKEN_LIFETIME": timezone.timedelta(hours=1),
     "REFRESH_TOKEN_LIFETIME": timezone.timedelta(days=1),
     "TOKEN_OBTAIN_SERIALIZER": "api.serializers.CustomTokenObtainPairSerializer"
 }
@@ -206,7 +206,7 @@ FILE_UPLOAD_TEMP_DIR = BASE_DIR
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # SMS code verify
-VERIFY_CODE_MINUTES = getattr(settings, 'VERIFY_CODE_MINUTES', 1440)
+VERIFY_CODE_MINUTES = getattr(settings, 'VERIFY_CODE_MINUTES', 5)
 
 # REDIS related settings
 REDIS_HOST = getattr(settings, 'REDIS_HOST', '127.0.0.1')

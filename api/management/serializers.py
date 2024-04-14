@@ -15,7 +15,6 @@ class UserSerializer(serializers.ModelSerializer):
 
     class Meta(ProfileMeta):
         model = User
-        read_only_fields = ProfileMeta.read_only_fields
 
 
 class ChangeAvatarSerializer(serializers.Serializer):
@@ -42,46 +41,37 @@ class VerifySerializer(serializers.Serializer):
 class AdminSerializer(serializers.ModelSerializer):
     """ """
 
-    class Meta(UserSerializer.Meta):
-        model = Admin
-
-
-class MeAdminSerializer(AdminSerializer):
     class Meta(ProfileMeta):
         model = Admin
-        read_only_fields = ProfileMeta.read_only_fields
+
+
+class MeAdminSerializer(serializers.ModelSerializer):
+    class Meta(ProfileMeta):
+        model = Admin
 
 
 class DoctorSerializer(serializers.ModelSerializer):
     """ """
 
-    class Meta(UserSerializer.Meta):
-        model = Doctor
-
-
-class MeDoctorSerializer(DoctorSerializer):
     class Meta(ProfileMeta):
         model = Doctor
-        read_only_fields = ProfileMeta.read_only_fields
+
+
+class MeDoctorSerializer(serializers.ModelSerializer):
+    class Meta(ProfileMeta):
+        model = Doctor
 
 
 class PatientSerializer(serializers.ModelSerializer):
     """ """
 
-    class Meta(UserSerializer.Meta):
-        model = Patient
-
-
-class MePatientSerializer(PatientSerializer):
     class Meta(ProfileMeta):
         model = Patient
-        read_only_fields = ProfileMeta.read_only_fields
-        
 
-# class AttachedFileSerializer(serializers.ModelSerializer):
-#     class Meta:
-#         model = AttachedFile
-#         fields = '__all__'
+
+class MePatientSerializer(serializers.ModelSerializer):
+    class Meta(ProfileMeta):
+        model = Patient
 
 
 class DistrictSerializer(serializers.ModelSerializer):
