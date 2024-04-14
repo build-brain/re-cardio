@@ -154,10 +154,11 @@ class Patient(User):
     # <-----Address data-----> #
 
     district = models.ForeignKey(verbose_name=_("District"), to="District", on_delete=models.SET_NULL, null=True, blank=True)
-    region = models.ForeignKey(verbose_name=_("Region"), to="Region", on_delete=models.SET_NULL, null=True, blank=True)
-    city = models.CharField(verbose_name=_("City"), max_length=50, null=True, blank=True)
-    mahalla = models.CharField(verbose_name=_("Mahalla"), max_length=80, null=True, blank=True)
-    street = models.CharField(verbose_name=_("Street"), max_length=120, null=True, blank=True)
+    # region = models.ForeignKey(verbose_name=_("Region"), to="Region", on_delete=models.SET_NULL, null=True, blank=True)
+    region = models.CharField(verbose_name=_("Region"), max_length=150, null=True, blank=True)
+    city = models.CharField(verbose_name=_("City"), max_length=150, null=True, blank=True)
+    mahalla = models.CharField(verbose_name=_("Mahalla"), max_length=150, null=True, blank=True)
+    street = models.CharField(verbose_name=_("Street"), max_length=150, null=True, blank=True)
     building = models.CharField(verbose_name=_("Building"), max_length=10, null=True, blank=True)
     latitude = models.DecimalField(verbose_name=_("Latitude"), max_digits=40, decimal_places=20, null=True, blank=True)
     longitude = models.DecimalField(verbose_name=_("Longitude"), max_digits=40, decimal_places=20, null=True, blank=True)
@@ -178,21 +179,6 @@ class District(models.Model):
     class Meta:
         verbose_name = _("District")
         verbose_name_plural = _("Districts")
-
-    def __str__(self):
-        return self.name
-
-
-class Region(models.Model):
-
-    """Region model"""
-
-    name = models.CharField(verbose_name=_("Region"), max_length=100)
-    district = models.ForeignKey(verbose_name=_("District"), to=District, on_delete=models.CASCADE, related_name='regions')
-
-    class Meta:
-        verbose_name = _("Region")
-        verbose_name_plural = _("Regions")
 
     def __str__(self):
         return self.name

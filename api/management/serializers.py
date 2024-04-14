@@ -88,11 +88,3 @@ class DistrictSerializer(serializers.ModelSerializer):
     class Meta:
         model = District
         fields = '__all__'
-
-
-class RegionSerializer(serializers.ModelSerializer):
-    district = DistrictSerializer()
-
-    class Meta:
-        model = Region
-        fields = '__all__'
