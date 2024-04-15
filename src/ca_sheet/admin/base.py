@@ -8,6 +8,7 @@ class ConditionAssessmentSheetAdmin(admin.ModelAdmin):
     list_filter = ('is_active',)
     search_fields = ('er_card__patient__first_name', 'er_card__patient__last_name', 'created_doctor__user__username')
     readonly_fields = ('created_at', 'updated_at')
+    
 
 @admin.register(ClinicalDiagnosis)
 class ClinicalDiagnosisAdmin(admin.ModelAdmin):
@@ -16,11 +17,13 @@ class ClinicalDiagnosisAdmin(admin.ModelAdmin):
     search_fields = ('primary_disease__name', 'ca_sheet__er_card__patient__first_name', 'ca_sheet__er_card__patient__last_name')
     readonly_fields = ('issue_date',)
 
+
 @admin.register(Complication)
 class ComplicationAdmin(admin.ModelAdmin):
     list_display = ('id', 'group', 'complication')
     list_filter = ('group',)
     search_fields = ('complication',)
+
 
 @admin.register(GraceScale)
 class GraceScaleAdmin(admin.ModelAdmin):

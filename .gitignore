@@ -12,6 +12,7 @@ backend/core/settings/development*
 
 # Ignore compiled Python files
 */**/migrations/
+*/**/__pycache__/
 __pycache__/
 *.pyc
 *.pyo

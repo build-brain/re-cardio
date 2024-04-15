@@ -9,12 +9,14 @@ class SecondStageDataAdmin(admin.ModelAdmin):
     search_fields = ('ca_sheet__id',)
     readonly_fields = ('ca_sheet',)
 
+
 @admin.register(MyocardialNecrosisBiochemicalMarker)
 class MyocardialNecrosisBiochemicalMarkerAdmin(admin.ModelAdmin):
     list_display = ('id', 'title', 'mnbm_date')
     list_filter = ('mnbm_date',)
     search_fields = ('title',)
     readonly_fields = ('second_stage',)
+
 
 @admin.register(AdditionalTestResult)
 class AdditionalTestResultAdmin(admin.ModelAdmin):

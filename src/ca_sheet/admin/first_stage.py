@@ -9,10 +9,12 @@ class FirstStageDataAdmin(admin.ModelAdmin):
     search_fields = ('main_complaint',)
     readonly_fields = ('ca_sheet',)
 
+
 @admin.register(MedicationGroup)
 class MedicationGroupAdmin(admin.ModelAdmin):
     list_display = ('id', 'name', 'description')
     search_fields = ('name',)
+
 
 @admin.register(Medication)
 class MedicationAdmin(admin.ModelAdmin):
