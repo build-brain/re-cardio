@@ -30,9 +30,9 @@ class AdmissionDataSerializer(serializers.ModelSerializer):
 
 
 class ElectronicRehabilitationCardSerializer(serializers.ModelSerializer):
-    # admission_data = AdmissionDataSerializer()
 
     class Meta:
         model = ElectronicRehabilitationCard
         fields = '__all__'
+        read_only_fields = ['admission_data',]
 
