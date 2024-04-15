@@ -30,7 +30,7 @@ class AdmissionDataSerializer(serializers.ModelSerializer):
 
 
 class ElectronicRehabilitationCardSerializer(serializers.ModelSerializer):
-    admission_data = AdmissionDataSerializer()
+    # admission_data = AdmissionDataSerializer()
 
     class Meta:
         model = ElectronicRehabilitationCard

@@ -6,7 +6,10 @@ def get_file_path(instance, filename):
     return f"uploads/{title}/{patient.username}/{filename}"
 
 
-def calculate_grace_score(age, heart_rate, systolic_bp, creatinine, cardiac_arrest, st_segment_abnormality, elevated_cardiac_markers, killip_class):
+def calculate_grace_score(instance):
+    age = instance.er_card.patient.age
+    heart_rate = instance.second_stage.heart_rate
+    systolic_bp = instance.second_stage.systolic_pressure
     score = 0
     
     # Возраст

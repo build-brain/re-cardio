@@ -2,6 +2,7 @@ from django.db import models
 from django.utils.translation import gettext_lazy as _
 
 from src.ca_sheet.choices.base import *
+from src.ca_sheet.utils import calculate_grace_score
 
 
 class ConditionAssessmentSheet(models.Model):
@@ -17,6 +18,10 @@ class ConditionAssessmentSheet(models.Model):
     class Meta:
         verbose_name = _("Condition assessment sheet")
         verbose_name_plural = _("Condition assessment sheets")
+    
+    @property
+    def grace_score(self):
+        return calculate_grace_score(self)
         
     def __str__(self):
         return self.er_card.patient.first_name
@@ -48,6 +53,7 @@ class ClinicalDiagnosis(models.Model):
     class Meta:
         verbose_name = _("Clinical diagnosis")
         verbose_name_plural = _("Clinical diagnoses")
+
 
     def __str__(self):
         return str(self.primary_disease.name)

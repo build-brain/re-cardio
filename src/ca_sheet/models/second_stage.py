@@ -33,7 +33,7 @@ class SecondStageData(models.Model):
 
     ecg_date = models.DateTimeField(verbose_name=_("ECG date"))
     heart_rate = models.FloatField(verbose_name=_("Heart rate"))
-    heart_rhythm = models.CharField(verbose_name=_("Heart rhythm"), max_length=100)
+    heart_rhythm = models.CharField(verbose_name=_("Heart rhythm"), max_length=50, choices=HeartRhythmChoices.choices)
     st_segment_depression = models.BooleanField(verbose_name=_("ST segment depression"), default=False)
     st_segment_depression_duration = models.BooleanField(verbose_name=_("ST segment depression duration"), default=False)
     st_segment_elevation = models.BooleanField(verbose_name=_("ST segment elevation"), default=False)
