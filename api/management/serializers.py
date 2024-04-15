@@ -7,7 +7,7 @@ from src.management.models import *
 
 class ProfileMeta:
     exclude = ["password", "is_staff", "is_superuser", "verify_time", "verify_code"]
-    read_only_fields = ["username", "user_type", "created_at", "updated_at", "last_login"]
+    read_only_fields = ["username", "user_type", "created_at", "updated_at", "last_login", "date_joined"]
 
 
 class UserSerializer(serializers.ModelSerializer):

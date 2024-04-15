@@ -37,7 +37,7 @@ class ThirdStageData(models.Model):
     affected_vessel_name = models.CharField(verbose_name=_("Name of the affected vessel"),max_length=50, choices=AffectedVesselNameChoices.choices, null=True) 
     vessel_lesion_volume = models.FloatField(verbose_name=_("Vessel lesion volume")) 
     index_syntax = models.FloatField(verbose_name=_("Index SYNTAX"), null=True, blank=True)
-    ca_attached = models.FileField(upload_to="uploads/coronary_angiography/% Y/% m/% d/", null=True, blank=True)
+    ca_attached = models.FileField(upload_to="uploads/coronary_angiography/", null=True, blank=True)
     
     class Meta:
         verbose_name = _("First stage data")

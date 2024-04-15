@@ -1,15 +1,42 @@
-.idea
-.vscode
-venv
-data
-conf
-*/__pycache__
-*/*/__pycache__
-*/migrations/*
-*/*/migrations/*
-*/*/*/migrations/*
-!*/migrations/__init__.py
+# Ignore database files
 *.sqlite3
-*.backup
-*.sql
-*.env
+*.db
+
+# Ignore static and media files
+static/
+media/
+
+
+# Ignore only development files
+backend/core/settings/development*
+
+# Ignore compiled Python files
+*/**/migrations/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Ignore environment files
+.env
+
+# Ignore logs and other generated files
+/logs/
+*.log
+*.pot
+*.pyc
+*.pyo
+*.pyd
+*.db.sqlite3-journal
+
+# Ignore the virtual environment
+venv/
+
+# Ignore VSCode settings
+.vscode/
+
+# Ignore pycache directories
+__pycache__/
+
+# Ignore pytest cache
+.pytest_cache/

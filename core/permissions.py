@@ -1,6 +1,6 @@
 from rest_framework import permissions
 
-from management.models import Admin, Doctor, Patient
+from src.management.models import Admin, Doctor, Patient
 
 
 class IsAdmin(permissions.BasePermission):

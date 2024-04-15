@@ -135,8 +135,8 @@ class Patient(User):
 
     """Patient user model"""
 
-    created_by = models.ForeignKey(verbose_name=_("Created doctor"), to=Doctor, related_name="created_patients", on_delete=models.SET_NULL, null=True)
-    curator = models.ForeignKey(verbose_name=_("Curator doctor"), to=Doctor, related_name="patients", on_delete=models.SET_NULL, null=True)
+    created_by = models.ForeignKey(verbose_name=_("Created doctor"), to=Doctor, related_name="created_patients", on_delete=models.SET_NULL, null=True, blank=True)
+    curator = models.ForeignKey(verbose_name=_("Curator doctor"), to=Doctor, related_name="patients", on_delete=models.SET_NULL, null=True, blank=True)
 
     # <-----Demographic data-----> #
 

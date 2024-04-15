@@ -40,6 +40,7 @@ class SecondStageData(models.Model):
     q_wave_or_qs_complex = models.BooleanField(verbose_name=_("Pathalogical Q wave or QS complex"), default=False)
     t_wave_inversion = models.BooleanField(verbose_name=_("T wave inversion "), default=False)
     ecg_attachment = models.FileField(verbose_name=_("ECG attachment"), upload_to="uploads/ecg/", null=True, blank=True)
+    ecg_additional = models.FileField(verbose_name=_("ECG additional"), upload_to="uploads/ecg/", null=True, blank=True)
 
     # <-----Echocardiography(EchoCG) data-----> #
 
@@ -55,6 +56,7 @@ class SecondStageData(models.Model):
     left_ventricle_decreased_pumping_function = models.CharField(verbose_name=_("Left ventricular decreased pumping function"), max_length=10, choices=EjectionFractionChoices.choices) 
     heart_cavity_platelet_vegetations = models.BooleanField(verbose_name=_("Platelet vegetations in heart cavity valves"), default=False)
     echocg_attachment = models.FileField(verbose_name=_("EchoCG attachment"), upload_to="uploads/echocg/", null=True, blank=True)
+    echocg_additional = models.FileField(verbose_name=_("EchoCG additional"), upload_to="uploads/echocg/", null=True, blank=True)
 
     # <-----Holter Monitoring ECG data-----> #
 
@@ -75,6 +77,7 @@ class SecondStageData(models.Model):
     hm_q_wave_or_qs_complex = models.BooleanField(verbose_name=_("Pathalogical Q wave or QS complex"), default=False)
     hm_t_wave_inversion = models.BooleanField(verbose_name=_("T wave inversion "), default=False)
     hm_ecg_attachment = models.FileField(verbose_name=_("Holter Monitoring ECG attachment"), upload_to="uploads/hm_ecg/", null=True, blank=True)
+    hm_ech_additional = models.FileField(verbose_name=_("Holter Monitoring ECG additional"), upload_to="uploads/hm_ecg/", null=True, blank=True)
 
     # <-----Myocardial necrosis biochemical markers(MNBM) data-----> #
     

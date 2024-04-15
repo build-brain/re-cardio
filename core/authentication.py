@@ -37,7 +37,7 @@ class DevAuthentication(SessionAuthentication):
                 case "DOCTOR":
                     return Doctor.objects.get(id=user.id)
                 case "PATIENT":
-                    return Patient.objects.get(id=user.id)
+                    return Patient.objects.get(id=user.id)                 
                 case _:
                     return user
         except ObjectDoesNotExist:
@@ -46,6 +46,17 @@ class DevAuthentication(SessionAuthentication):
 
 class TokenAuthentication(JWTAuthentication):
     """ """
+
+    def get_user_model(self, user_type):
+        match user_type:
+            case "ADMIN":
+                return Admin
+            case "DOCTOR":
+                return Doctor
+            case "PATIENT":
+                return Patient
+            case _:
+                return self.user_model
 
     def get_user(self, validated_token: Token) -> AuthUser:
         """ """
@@ -56,15 +67,8 @@ class TokenAuthentication(JWTAuthentication):
             raise InvalidToken(_("Token contained no recognizable user identification"))
 
         try:
-            match user_type:
-                case "ADMIN":
-                    user = Admin.objects.get(id=user_id)
-                case "DOCTOR":
-                    user = Doctor.objects.get(id=user_id)
-                case "PATIENT":
-                    user = Patient.objects.get(id=user_id)
-                case _:
-                    user = self.user_model.objects.get(id=user_id)
+            self.user_model = self.get_user_model(user_type)
+            user = self.user_model.objects.get(**{api_settings.USER_ID_FIELD: user_id})
         except self.user_model.DoesNotExist:
             raise AuthenticationFailed(_("User not found"), code="user_not_found")
 

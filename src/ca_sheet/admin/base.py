@@ -1,6 +1,7 @@
 from django.contrib import admin
 from src.ca_sheet.models.base import * 
 
+
 @admin.register(ConditionAssessmentSheet)
 class ConditionAssessmentSheetAdmin(admin.ModelAdmin):
     list_display = ('id', 'er_card', 'created_at', 'updated_at', 'is_active', 'created_doctor')
