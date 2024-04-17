@@ -23,7 +23,7 @@ class AttachedFileSerializer(serializers.ModelSerializer):
 
 
 class AdmissionDataSerializer(serializers.ModelSerializer):
-    attachments = AttachedFileSerializer(many=True)
+    attachments = AttachedFileSerializer(many=True, read_only=True)
     class Meta:
         model = AdmissionData
         fields = '__all__'
