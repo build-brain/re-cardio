@@ -2,7 +2,6 @@ from django.db import models
 from django.utils.translation import gettext_lazy as _
 
 from src.ca_sheet.choices.base import *
-from src.ca_sheet.utils import calculate_grace_score
 
 
 class ConditionAssessmentSheet(models.Model):
