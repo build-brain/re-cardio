@@ -18,9 +18,9 @@ class ConditionAssessmentSheet(models.Model):
         verbose_name = _("Condition assessment sheet")
         verbose_name_plural = _("Condition assessment sheets")
     
-    @property
-    def grace_score(self):
-        return calculate_grace_score(self)
+    # @property
+    # def grace_score(self):
+    #     return calculate_grace_score(self)
         
     def __str__(self):
         return self.er_card.patient.first_name
