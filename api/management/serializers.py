@@ -7,7 +7,7 @@ from src.management.models import *
 
 class ProfileMeta:
     exclude = ["password", "is_staff", "is_superuser", "verify_time", "verify_code"]
-    read_only_fields = ["username", "user_type", "created_at", "updated_at", "last_login", "date_joined"]
+    read_only_fields = ["username", "user_type", "created_at", "updated_at", "last_login", "date_joined",]
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -15,6 +15,7 @@ class UserSerializer(serializers.ModelSerializer):
 
     class Meta(ProfileMeta):
         model = User
+        read_only_fields = ProfileMeta.read_only_fields + ["avatar"]
 
 
 class ChangeAvatarSerializer(serializers.Serializer):
@@ -41,7 +42,7 @@ class VerifySerializer(serializers.Serializer):
 class AdminSerializer(serializers.ModelSerializer):
     """ """
 
-    class Meta(ProfileMeta):
+    class Meta(UserSerializer.Meta):
         model = Admin
 
 
@@ -53,8 +54,9 @@ class MeAdminSerializer(serializers.ModelSerializer):
 class DoctorSerializer(serializers.ModelSerializer):
     """ """
 
-    class Meta(ProfileMeta):
+    class Meta(UserSerializer.Meta):
         model = Doctor
+
 
 
 class MeDoctorSerializer(serializers.ModelSerializer):
@@ -65,7 +67,7 @@ class MeDoctorSerializer(serializers.ModelSerializer):
 class PatientSerializer(serializers.ModelSerializer):
     """ """
 
-    class Meta(ProfileMeta):
+    class Meta(UserSerializer.Meta):
         model = Patient
 
 

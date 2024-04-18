@@ -66,6 +66,7 @@ INSTALLED_APPS = [
     'src.management',
     'src.er_card',
     'src.ca_sheet',
+    'src.diary',
 ]
 
 MIDDLEWARE = [

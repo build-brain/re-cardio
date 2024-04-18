@@ -10,7 +10,7 @@ class ElectronicRehabilitationCard(models.Model):
     
     """Electronic Rehabilitation Card model"""
     
-    patient = models.ForeignKey(verbose_name=_("Patient"), to=Patient, on_delete=models.CASCADE)
+    patient = models.ForeignKey(verbose_name=_("Patient"), to=Patient, on_delete=models.CASCADE, related_name='er_cards')
     doctor = models.ForeignKey(verbose_name=_("Created doctor"), to=Doctor, on_delete=models.SET_NULL, related_name='er_cards', null=True)
     admission_data = models.ForeignKey(verbose_name=_("Admission data"), to="AdmissionData", on_delete=models.SET_NULL, related_name='er_cards', null=True)
     

@@ -20,7 +20,7 @@ class User(AbstractUser, PermissionsMixin):
 
     """Main user"""
 
-    avatar = models.ImageField(verbose_name=_("Avatar"), upload_to="avatars/", default=settings.NO_AVATAR, blank=True)
+    avatar = models.ImageField(verbose_name=_("Avatar"), upload_to="avatars/", default=settings.NO_AVATAR)
     phone = models.CharField(verbose_name=_("Phone Number"), max_length=15, unique=True)
 
     middle_name = models.CharField(verbose_name=_("Middle name"), max_length=50, blank=True)

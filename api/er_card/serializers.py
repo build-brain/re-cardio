@@ -27,6 +27,7 @@ class AdmissionDataSerializer(serializers.ModelSerializer):
     class Meta:
         model = AdmissionData
         fields = '__all__'
+    
 
 
 class ElectronicRehabilitationCardSerializer(serializers.ModelSerializer):

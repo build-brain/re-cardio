@@ -23,7 +23,7 @@ class SecondStageData(models.Model):
 
     systolic_pressure = models.FloatField(verbose_name=_("Systolic blood pressure"))
     diastolic_pressure = models.FloatField(verbose_name=_("Diastolic blood pressure"))
-    radial_artery_pulse_rate = models.FloatField(verbose_name=_("Radial artery pulse rate"), null=True, blank=True)
+    pulse_rate = models.FloatField(verbose_name=_("Radial artery pulse rate"), null=True, blank=True)
     respiratory_rate = models.FloatField(verbose_name=_("Respiratory rate"), null=True, blank=True)
     
     moist_rales = models.BooleanField(verbose_name=_("Lung moist rales"), default=False, blank=True)

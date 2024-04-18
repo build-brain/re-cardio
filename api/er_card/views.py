@@ -48,3 +48,4 @@ class AdmissionDataViewSet(viewsets.ModelViewSet):
 class InternationalClassificationOfDiseasesViewSet(viewsets.ModelViewSet):
     queryset = InternationalClassificationOfDiseases.objects.all()
     serializer_class = InternationalClassificationOfDiseasesSerializer
+    pagination_class = None
