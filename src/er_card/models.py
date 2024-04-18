@@ -56,8 +56,8 @@ class InternationalClassificationOfDiseases(models.Model):
     
     """International Classification of Diseases, 10th Revision (ICD-10)"""
 
-    code = models.CharField(verbose_name=_("Diagnosis code"), max_length=15)
-    title = models.CharField(verbose_name=_("Diagnosis title"),max_length=150)
+    code = models.CharField(verbose_name=_("Diagnosis code"), max_length=15, unique=True)
+    title = models.CharField(verbose_name=_("Diagnosis title"),max_length=255)
 
     class Meta:
         verbose_name = _("Diagnosis")
