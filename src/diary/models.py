@@ -6,20 +6,25 @@ from django.utils.translation import gettext_lazy as _
 from .choices import *
 
 
-class Record(models.Model):
+class HealthDiaryRecord(models.Model):
 
-    """Record model"""
+    """Health diary model"""
     
     creation_date = models.DateField(verbose_name=_("Creation Date"), auto_now_add=True, unique=True)
     er_card = models.ForeignKey(verbose_name=_("ER Card"), to="er_card.ElectronicRehabilitationCard", on_delete=models.CASCADE, related_name="records")
     created_at = models.DateTimeField(verbose_name=_("Created At"), auto_now_add=True)
     updated_at = models.DateTimeField(verbose_name=_("Updated At"), auto_now=True)
 
+    class Meta:
+        verbose_name = _("Health Diary Record")
+        verbose_name_plural = _("Health Diary Records")
+        
+
 class PhysicalIndicators(models.Model):
 
     """Physical indicators model"""
     
-    record = models.OneToOneField(verbose_name=_("Record"), to=Record, on_delete=models.CASCADE, related_name="physical_indicators")
+    record = models.OneToOneField(verbose_name=_("Record"), to=HealthDiaryRecord, on_delete=models.CASCADE, related_name="physical_indicators", unique=True)
     general_condition = models.CharField(verbose_name=_("General Condition"), max_length=20, choices=GeneralConditionChoices.choices)
     body_temperature = models.FloatField(verbose_name=_("Body Temperature (°C)"))
     systolic_pressure = models.FloatField(verbose_name=_("Systolic Blood Pressure (mmHg)"))
@@ -42,15 +47,12 @@ class PhysicalIndicators(models.Model):
         verbose_name = _("Physical Indicators")
         verbose_name_plural = _("Physical Indicators")
         
-    # def save(self, *args, **kwargs):
-    #     self.record = Record.objects.get_or_create(creation_date=date.today())
-    #     super().save(*args, **kwargs)
-
+        
 class PhysicalActivity(models.Model):
 
     """Physical activity model"""
     
-    record = models.OneToOneField(Record, on_delete=models.CASCADE, related_name="physical_activity", unique=True)
+    record = models.OneToOneField(HealthDiaryRecord, on_delete=models.CASCADE, related_name="physical_activity", unique=True)
     walking_speed = models.FloatField(verbose_name=_("Walking Speed"))
     walking_duration = models.FloatField(verbose_name=_("Walking Duration (min)"))
     distance_covered = models.FloatField(verbose_name=_("Distance Covered (m)"))
