@@ -77,24 +77,24 @@ class BorgScalePerceptionOfPhysicalEffortChoices(models.IntegerChoices):
     """Восприятие физической нагрузки по шкале Борга"""
     
     # Состояние покоя
-    RESTING_STATE = '0', _("Resting State")
+    RESTING_STATE = 0, _("Resting State")
     # Очень легко
-    VERY_LIGHT = '1', _("Very Light")
+    VERY_LIGHT = 1, _("Very Light")
     # Легко
-    LIGHT = '2', _("Light")
+    LIGHT = 2, _("Light")
     # Умеренная нагрузка
-    MODERATE = '3', _("Moderate")
+    MODERATE = 3, _("Moderate")
     # Довольно тяжело
-    FAIRLY_HARD = '4', _("Fairly Hard")
+    FAIRLY_HARD = 4, _("Fairly Hard")
     # Тяжело
-    HARD = '5', _("Hard")
+    HARD = 5, _("Hard")
     # Тяжелее
-    HARDER = '6', _("Hard")
+    HARDER = 6, _("Hard")
     # Очень тяжело
-    VERY_HARD = '7', _("Very Hard")
+    VERY_HARD = 7, _("Very Hard")
     # Тяжелее очень тяжелого
-    VERY_HARDER = '8', _("Very Hard")
+    VERY_HARDER = 8, _("Very Hard")
     # Очень очень тяжело
-    VERY_VERY_HARD = '9', _("Very, Very Hard")
+    VERY_VERY_HARD = 9, _("Very, Very Hard")
     # Максимальная нагрузка
-    MAXIMUM_EFFORT = '10', _("Maximum Effort")
+    MAXIMUM_EFFORT = 10, _("Maximum Effort")
