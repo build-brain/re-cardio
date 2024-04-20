@@ -57,7 +57,7 @@ class PhysicalActivity(models.Model):
     walking_duration = models.FloatField(verbose_name=_("Walking Duration (min)"), null=True, blank=True)
     distance_covered = models.FloatField(verbose_name=_("Distance Covered (m)"), null=True, blank=True)
     step_count = models.FloatField(verbose_name=_("Step Count"), null=True, blank=True)
-    borg_scale = models.IntegerChoices(verbose_name=_("Borg Scale Perception of Physical Effort"), choices=BorgScalePerceptionOfPhysicalEffortChoices.choices, null=True, blank=True)
+    borg_scale = models.PositiveSmallIntegerField(verbose_name=_("Borg Scale Perception of Physical Effort"), choices=BorgScalePerceptionOfPhysicalEffortChoices.choices, null=True, blank=True)
 
     class Meta:
         verbose_name = _("Physical Activity")
