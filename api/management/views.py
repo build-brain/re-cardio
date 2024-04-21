@@ -216,7 +216,7 @@ class PatientViewSet(viewsets.ModelViewSet):
 
     def get_object(self):
         if self.action == "admission_data":
-            return AdmissionData.objects.filter(patient=self.request.user.id).latest('admission_date')
+            return AdmissionData.objects.filter(patient=self.request.user.id).latest('created_at')
         return super().get_object()
     
     def get_serializer_class(self):
