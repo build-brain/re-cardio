@@ -47,6 +47,9 @@ class AdmissionData(models.Model):
     diagnosed_by = models.CharField(verbose_name=_("Diagnosed by"), max_length=50, choices=DiagnosedByTypeChoices.choices, null=True, blank=True)
     additional_information = models.TextField(verbose_name=_("Additional information"), null=True, blank=True)
 
+    created_at = models.DateTimeField(verbose_name=_("Create date"), auto_now_add=True)
+    updated_at = models.DateTimeField(verbose_name=_("Update date"), auto_now=True)
+
     class Meta:
         verbose_name = _("Admission data")
         verbose_name_plural = _("Admission data")
