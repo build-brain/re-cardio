@@ -33,7 +33,7 @@ class AdmissionData(models.Model):
     """Admission data model"""
     
     patient = models.ForeignKey(verbose_name=_("Patient"), to=Patient, on_delete=models.CASCADE, related_name="admission_data")    
-    admission_date = models.DateTimeField(verbose_name=_("Admission date"), null=True, blank=True)
+    admission_date = models.DateTimeField(verbose_name=_("Admission date"), unique=True)
     delivery_time = models.DurationField(verbose_name=_("Delivery time"), null=True, blank=True)
     patient_condition = models.CharField(verbose_name=_("Patient condition"), max_length=30, choices=ConditionChoices.choices, null=True, blank=True)
     patient_complaints = models.TextField(verbose_name=_("Patient complaints"), null=True, blank=True)
@@ -46,9 +46,6 @@ class AdmissionData(models.Model):
     preliminary_diagnosis = models.ForeignKey(verbose_name=_("Preliminary diagnosis"), to="InternationalClassificationOfDiseases", on_delete=models.SET_NULL, related_name='er_cards', null=True)
     diagnosed_by = models.CharField(verbose_name=_("Diagnosed by"), max_length=50, choices=DiagnosedByTypeChoices.choices, null=True, blank=True)
     additional_information = models.TextField(verbose_name=_("Additional information"), null=True, blank=True)
-
-    created_at = models.DateTimeField(verbose_name=_("Create date"), auto_now_add=True)
-    updated_at = models.DateTimeField(verbose_name=_("Update date"), auto_now=True)
 
     class Meta:
         verbose_name = _("Admission data")
