@@ -5,8 +5,12 @@ from rest_framework import viewsets, status
 from rest_framework.decorators import action
 from rest_framework.response import Response
 
-from .serializers import *
+from drf_yasg.utils import swagger_auto_schema
+
+from api.er_card.serializers import AdmissionDataSerializer
+from src.er_card.models import AdmissionData
 from src.management.models import *
+from .serializers import *
 
 
 class UserViewSet(viewsets.ModelViewSet):
@@ -204,6 +208,32 @@ class PatientViewSet(viewsets.ModelViewSet):
         'gender', 
         'district'
     ]
+
+    def get_queryset(self):
+        if self.action == "admission_data":
+            return AdmissionData.objects.filter(patient=self.request.user.id).last()
+        return super().get_queryset()
+
+    def get_object(self):
+        if self.action == "admission_data":
+            return AdmissionData.objects.filter(patient=self.request.user.id).latest('admission_date')
+        return super().get_object()
+    
+    def get_serializer_class(self):
+        if self.action == "admission_data":
+            return AdmissionDataSerializer
+        return super().get_serializer_class()
+    
+    @swagger_auto_schema(method='get', request_body=AdmissionDataSerializer)    
+    @action(url_path="admission_data", detail=True, methods=["GET", "PUT", "PATCH"])
+    def admission_data(self, request, *args, **kwargs):
+        match request.method:
+            case "GET":
+                return super().retrieve(request, *args, **kwargs)
+            case "PUT":
+                return super().update(request, *args, **kwargs)
+            case "PATCH":
+                return super().partial_update(request, *args, **kwargs)
 
 
 # class AttachedFileViewSet(viewsets.ModelViewSet):
