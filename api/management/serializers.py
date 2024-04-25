@@ -67,16 +67,8 @@ class MeDoctorSerializer(serializers.ModelSerializer):
 class PatientSerializer(serializers.ModelSerializer):
     """ """
 
-    class Meta:
+    class Meta(ProfileMeta):
         model = Patient
-        fields = [
-            "id", "first_name", "last_name", "middle_name", "is_active", "phone", "birth_date",
-            "pinfl", "passport", "passport_attachment", "additional_information", "age", "gender",
-            "ethnicity", "social_group", "profession", "demographic_additional", "additional_phone_number", 
-            "email", "telegram_username", "region", "city", "mahalla", "street", "building",
-            "latitude", "longitude", "created_by", "curator", "district", "admission_data"
-        ]
-        read_only_fields = ProfileMeta.read_only_fields
 
 
 class MePatientSerializer(serializers.ModelSerializer):
