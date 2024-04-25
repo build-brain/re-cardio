@@ -66,9 +66,10 @@ class MeDoctorSerializer(serializers.ModelSerializer):
 
 class PatientSerializer(serializers.ModelSerializer):
     """ """
-
+    admission_data = serializers.PrimaryKeyRelatedField(many=True, read_only=True)
     class Meta(ProfileMeta):
         model = Patient
+        read_only_fields = ProfileMeta.read_only_fields + ["admission_data"]
 
 
 class MePatientSerializer(serializers.ModelSerializer):
