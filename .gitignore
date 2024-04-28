@@ -12,10 +12,16 @@ conf/
 backend/core/settings/development*
 
 # Ignore compiled Python files
-*/**/migrations/
 __pycache__/
 */**/__pycache__/
 */*/**/__pycache__/
+*/*/*/**/__pycache__/
+
+migrations/
+*/**/migrations/
+*/*/**/migrations/
+*/*/*/**/migrations/
+
 *.pyc
 *.pyo
 *.pyd

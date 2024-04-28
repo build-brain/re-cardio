@@ -35,3 +35,17 @@ class ConditionChoices(models.TextChoices):
     EXTREMELY_SEVERE = 'extremely_severe', _('Extremely severe')
 
 
+class PatientSeverityClassChoices(models.IntegerChoices):
+    
+    """Класс тяжести пациента"""
+
+    # I класс тяжести
+    I_CLASS = 1, _('I class')
+    # II класс тяжести
+    II_CLASS = 2, _('II class')
+    # III класс тяжести
+    III_CLASS = 3, _('III class')
+    # IV класс тяжести
+    IV_CLASS = 4, _('IV class')
+    
+
