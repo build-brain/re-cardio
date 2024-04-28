@@ -65,7 +65,6 @@ INSTALLED_APPS = [
     'src',
     'src.management',
     'src.er_card',
-    'src.ca_sheet',
     'src.diary',
 ]
 

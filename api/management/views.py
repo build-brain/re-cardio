@@ -7,8 +7,6 @@ from rest_framework.response import Response
 
 from drf_yasg.utils import swagger_auto_schema
 
-from api.er_card.serializers import AdmissionDataSerializer
-from src.er_card.models import AdmissionData
 from src.management.models import *
 from .serializers import *
 
@@ -209,63 +207,6 @@ class PatientViewSet(viewsets.ModelViewSet):
         'district'
     ]
     
-    @swagger_auto_schema(method='get', request_body=AdmissionDataSerializer)    
-    @action(url_path="admission_data", detail=True, methods=["GET", "PUT", "PATCH"], serializer_class=AdmissionDataSerializer)
-    def admission_data(self, request, *args, **kwargs):
-        try:
-            match request.method:
-                case "GET":
-                    patient = self.get_object()
-                    instance = AdmissionData.objects.filter(patient=patient).latest('admission_date')
-                    serializer = self.serializer_class(instance)
-                    return Response(serializer.data)
-                case "PUT":
-                    partial = kwargs.pop('partial', False)
-                    patient = self.get_object()
-                    instance = AdmissionData.objects.filter(patient=patient).latest('admission_date')
-                    serializer = AdmissionDataSerializer(instance, data=request.data, partial=partial)
-                    serializer.is_valid(raise_exception=True)
-                    self.perform_update(serializer)
-
-                    if getattr(instance, '_prefetched_objects_cache', None):
-                        # If 'prefetch_related' has been applied to a queryset, we need to
-                        # forcibly invalidate the prefetch cache on the instance.
-                        instance._prefetched_objects_cache = {}
-
-                    return Response(serializer.data)
-                case "PATCH":
-                    partial = kwargs.pop('partial', True)
-                    patient = self.get_object()
-                    instance = AdmissionData.objects.filter(patient=patient).latest('admission_date')
-                    serializer = AdmissionDataSerializer(instance, data=request.data, partial=partial)
-                    serializer.is_valid(raise_exception=True)
-                    self.perform_update(serializer)
-
-                    if getattr(instance, '_prefetched_objects_cache', None):
-                        # If 'prefetch_related' has been applied to a queryset, we need to
-                        # forcibly invalidate the prefetch cache on the instance.
-                        instance._prefetched_objects_cache = {}
-                        
-                    return Response(serializer.data)
-                        
-                case "DELETE":
-                    patient = self.get_object()
-                    instance = AdmissionData.objects.filter(patient=patient).latest('admission_date')
-                    self.perform_destroy(instance)
-                    return Response(status=status.HTTP_204_NO_CONTENT)
-        except AdmissionData.DoesNotExist:
-            return Response(status=status.HTTP_404_NOT_FOUND, data={"message": _("The admission data has not been found!")})
-
-    @swagger_auto_schema(method='post', request_body=AdmissionDataSerializer)    
-    @action(url_path="create_admission", detail=True, methods=["POST"], serializer_class=AdmissionDataSerializer)
-    def create_admission(self, request, pk=None):
-        patient = self.get_object()
-        serializer = self.serializer_class(data=request.data)
-        if serializer.is_valid():
-            serializer.save(patient=patient)
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
 
 # class AttachedFileViewSet(viewsets.ModelViewSet):
 #     queryset = AttachedFile.objects.all()

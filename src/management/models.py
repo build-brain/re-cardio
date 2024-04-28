@@ -13,7 +13,7 @@ from solo.models import SingletonModel
 from .choices import *
 from .managers import UserManager
 from .services.tasks import send_verify_code, send_password
-from .utils import get_passport_path
+from .utils import get_passport_path, get_file_path
 
 
 class User(AbstractUser, PermissionsMixin):
@@ -135,7 +135,7 @@ class Patient(User):
 
     """Patient user model"""
 
-    created_by = models.ForeignKey(verbose_name=_("Created doctor"), to=Doctor, related_name="created_patients", on_delete=models.SET_NULL, null=True, blank=True)
+    created_by = models.ForeignKey(verbose_name=_("Created doctor"), to=Doctor, related_name="created_patients", on_delete=models.SET_NULL, null=True)
     curator = models.ForeignKey(verbose_name=_("Curator doctor"), to=Doctor, related_name="patients", on_delete=models.SET_NULL, null=True, blank=True)
 
     # <-----Demographic data-----> #
@@ -157,7 +157,6 @@ class Patient(User):
     # <-----Address data-----> #
 
     district = models.ForeignKey(verbose_name=_("District"), to="District", on_delete=models.SET_NULL, null=True, blank=True)
-    # region = models.ForeignKey(verbose_name=_("Region"), to="Region", on_delete=models.SET_NULL, null=True, blank=True)
     region = models.CharField(verbose_name=_("Region"), max_length=150, null=True, blank=True)
     city = models.CharField(verbose_name=_("City"), max_length=150, null=True, blank=True)
     mahalla = models.CharField(verbose_name=_("Mahalla"), max_length=150, null=True, blank=True)
@@ -165,8 +164,6 @@ class Patient(User):
     building = models.CharField(verbose_name=_("Building"), max_length=10, null=True, blank=True)
     latitude = models.DecimalField(verbose_name=_("Latitude"), max_digits=40, decimal_places=20, null=True, blank=True)
     longitude = models.DecimalField(verbose_name=_("Longitude"), max_digits=40, decimal_places=20, null=True, blank=True)
-
-
 
     class Meta:
         db_table = "patient"
@@ -188,16 +185,14 @@ class District(models.Model):
         return self.name
 
 
-# class Region(models.Model):
+class AttachedFile(models.Model):
 
-#     """Region model"""
+    """Attached File model"""
 
-#     name = models.CharField(verbose_name=_("Region"), max_length=100)
-#     district = models.ForeignKey(verbose_name=_("District"), to=District, on_delete=models.CASCADE, related_name='regions')
+    patient = models.ForeignKey(verbose_name=_("Patient"), to=Patient, related_name='attachments',on_delete=models.CASCADE)
+    title = models.CharField(verbose_name=_("Title"), max_length=90)
+    attachment = models.FileField(verbose_name=_("Attachment"), upload_to=get_file_path, max_length=255)
 
-#     class Meta:
-#         verbose_name = _("Region")
-#         verbose_name_plural = _("Regions")
-
-#     def __str__(self):
-#         return self.name
+    class Meta:
+        verbose_name = _("Attached file")
+        verbose_name_plural = _("Attached files")
