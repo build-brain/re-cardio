@@ -15,14 +15,14 @@ class UserManager(BaseUserManager):
         user.save(using=self._db)
         return user
 
-    # def create_superuser(self, phone, password):
-    #     user = self.create_user(phone=phone, password=password)
-    #     user.user_type = "SUPERUSER"
-    #     user.is_active = True
-    #     user.is_staff = True
-    #     user.is_superuser = True
-    #     user.save(using=self._db)
-    #     return user
+    def create_superuser(self, phone, password):
+        user = self.create_user(phone=phone, password=password)
+        user.user_type = "SUPERUSER"
+        user.is_active = True
+        user.is_staff = True
+        user.is_superuser = True
+        user.save(using=self._db)
+        return user
 
     # @transaction.atomic
     # def signup(self, first_name, password, phone, is_entity, last_name="", company_name=None, tin=None):
