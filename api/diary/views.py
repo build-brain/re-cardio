@@ -55,8 +55,10 @@ class PhysicalActivityViewSet(viewsets.ModelViewSet):
             serializer.save(record=record)
         except ElectronicRehabilitationCard.DoesNotExist:
             raise serializers.ValidationError({"error": _("Patient does not have Electronic Rehabilitation Card.")})
-        except IntegrityError:
-            raise serializers.ValidationError({"error": _("Record already exists")})
+        except IntegrityError as e:
+            raise serializers.ValidationError({"error": e})
+        except AttributeError as e:
+            raise serializers.ValidationError({"error": e})
 
     def create(self, request, *args, **kwargs):
         try:
