@@ -22,18 +22,29 @@ class PhysicalIndicatorsViewSet(viewsets.ModelViewSet):
     filterset_class = PhysicalIndicatorsFilter
     
     def perform_create(self, serializer):
-        if self.request.user.user_type == "PATIENT":
-            patient = self.request.user
-            try:
-                er_card = ElectronicRehabilitationCard.objects.get(patient=patient, is_active=True)
-                record, created = HealthDiaryRecord.objects.get_or_create(creation_date=date.today(), er_card=er_card)
-                serializer.save(record=record)
-            except IntegrityError:
-                raise serializers.ValidationError({"error": "Record already exists"})
-            except ElectronicRehabilitationCard.DoesNotExist:
-                raise serializers.ValidationError({"error": "Patient does not have Electronic Rehabilitation Card."})
-        else:
-            raise serializers.ValidationError({"error": "User is not a patient."})
+        user = self.request.user
+        if user.user_type != "PATIENT":
+            raise serializers.ValidationError({"error": _("User is not a patient.")})
+
+        try:
+            er_card = user.er_cards.filter(is_active=True).latest('created_at')
+            record, created = HealthDiaryRecord.objects.get_or_create(
+                creation_date=date.today(),
+                er_card=er_card
+            )
+            serializer.save(record=record)
+        except ElectronicRehabilitationCard.DoesNotExist:
+            raise serializers.ValidationError({"error": _("Patient does not have Electronic Rehabilitation Card.")})
+        except IntegrityError as e:
+            raise serializers.ValidationError({"error": e.args[0]})
+        except AttributeError as e:
+            raise serializers.ValidationError({"error": e.args[0]})
+
+    def create(self, request, *args, **kwargs):
+        try:
+            return super().create(request, *args, **kwargs)
+        except serializers.ValidationError as e:
+            return Response(e.detail, status=status.HTTP_400_BAD_REQUEST)
         
         
 class PhysicalActivityViewSet(viewsets.ModelViewSet):
@@ -47,7 +58,7 @@ class PhysicalActivityViewSet(viewsets.ModelViewSet):
             raise serializers.ValidationError({"error": _("User is not a patient.")})
 
         try:
-            er_card = user.er_cards.get(is_active=True)
+            er_card = user.er_cards.filter(is_active=True).latest('created_at')
             record, created = HealthDiaryRecord.objects.get_or_create(
                 creation_date=date.today(),
                 er_card=er_card
@@ -56,9 +67,9 @@ class PhysicalActivityViewSet(viewsets.ModelViewSet):
         except ElectronicRehabilitationCard.DoesNotExist:
             raise serializers.ValidationError({"error": _("Patient does not have Electronic Rehabilitation Card.")})
         except IntegrityError as e:
-            raise serializers.ValidationError({"error": e})
+            raise serializers.ValidationError({"error": e.args[0]})
         except AttributeError as e:
-            raise serializers.ValidationError({"error": e})
+            raise serializers.ValidationError({"error": e.args[0]})
 
     def create(self, request, *args, **kwargs):
         try:
