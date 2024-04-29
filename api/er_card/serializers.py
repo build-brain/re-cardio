@@ -28,7 +28,13 @@ class ElectronicRehabilitationCardSerializer(serializers.ModelSerializer):
     class Meta:
         model = er_card.ElectronicRehabilitationCard
         fields = '__all__'
-        read_only_fields = ['admission_data',]
+
+
+class AdmissionDataSerializer(serializers.ModelSerializer):
+    
+    class Meta:
+        model = er_card.AdmissionData
+        fields = '__all__'
 
 
 class ComplicationSerializer(serializers.ModelSerializer):

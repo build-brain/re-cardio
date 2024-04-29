@@ -5,6 +5,7 @@ from .views import *
 router = DefaultRouter()
 
 router.register(r'er_card', ElectronicRehabilitationCardViewSet)
+router.register(r'admission-data', AdmissionDataViewSet)
 router.register(r'icd', InternationalClassificationOfDiseasesViewSet)
 router.register(r'medications', MedicationViewSet)
 router.register(r'medication-groups', MedicationGroupViewSet)

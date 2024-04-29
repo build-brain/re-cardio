@@ -17,7 +17,25 @@ class ElectronicRehabilitationCard(models.Model):
     created_at = models.DateTimeField(verbose_name=_("Create date"), auto_now_add=True)
     updated_at = models.DateTimeField(verbose_name=_("Update date"), auto_now=True)
     
-    # <-----Admission data-----> #
+
+    
+    class Meta:
+        verbose_name = _("Electronic rehabilitation card")
+        verbose_name_plural = _("Electronic rehabilitation cards")
+        
+    @property
+    def is_archive(self):
+        if not self.is_active:
+            return True
+
+            
+class AdmissionData(models.Model):
+    
+    """Admission data model"""
+    
+    er_card = models.OneToOneField(
+        verbose_name=_("Electronic rehabilitation card"), to=ElectronicRehabilitationCard,
+        on_delete=models.CASCADE, related_name="admission_data")
     
     admission_date = models.DateTimeField(verbose_name=_("Admission date"), unique=True)
     delivery_time = models.DurationField(verbose_name=_("Delivery time"), null=True, blank=True)
@@ -32,15 +50,10 @@ class ElectronicRehabilitationCard(models.Model):
     preliminary_diagnosis = models.ForeignKey(verbose_name=_("Preliminary diagnosis"), to="InternationalClassificationOfDiseases", on_delete=models.SET_NULL, related_name='er_cards', null=True)
     diagnosed_by = models.CharField(verbose_name=_("Diagnosed by"), max_length=50, choices=DiagnosedByTypeChoices.choices, null=True, blank=True)
     additional_information = models.TextField(verbose_name=_("Additional information"), null=True, blank=True)
-    
-    class Meta:
-        verbose_name = _("Electronic rehabilitation card")
-        verbose_name_plural = _("Electronic rehabilitation cards")
         
-    @property
-    def is_archive(self):
-        if not self.is_active:
-            return True
+    class Meta:
+        verbose_name = _("Admission data")
+        verbose_name_plural = _("Admission data")
         
         
 class InternationalClassificationOfDiseases(models.Model):
@@ -87,5 +100,3 @@ class ConditionAssessmentSheet(models.Model):
     class Meta:
         verbose_name = _("Condition assessment sheet")
         verbose_name_plural = _("Condition assessment sheets")
-
-

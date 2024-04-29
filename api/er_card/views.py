@@ -4,18 +4,18 @@ from rest_framework.response import Response
 
 from drf_yasg.utils import swagger_auto_schema
 
-from src.er_card.models.er_card import *
-from src.er_card.models.first_stage import *
-from src.er_card.models.second_stage import *
-from src.er_card.models.third_stage import *
-from src.er_card.models.diagnosis import *
+from src.er_card.models import *
 from .serializers import *
 
 
 class ElectronicRehabilitationCardViewSet(viewsets.ModelViewSet):
     queryset = ElectronicRehabilitationCard.objects.all()
     serializer_class = ElectronicRehabilitationCardSerializer
-    
+
+
+class AdmissionDataViewSet(viewsets.ModelViewSet):
+    queryset = AdmissionData.objects.all()
+    serializer_class = AdmissionDataSerializer    
 
 class InternationalClassificationOfDiseasesViewSet(viewsets.ModelViewSet):
     queryset = InternationalClassificationOfDiseases.objects.all()
