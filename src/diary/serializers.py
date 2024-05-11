@@ -17,6 +17,7 @@ class BodyTemperatureSerializer(serializers.Serializer):
     """Body temperature serializer"""
     
     body_temperature = serializers.FloatField(write_only=True)
+    creation_date = serializers.DateField(write_only=True)
 
 
 class ArterialPressureSerializer(serializers.Serializer):
@@ -25,6 +26,7 @@ class ArterialPressureSerializer(serializers.Serializer):
 
     systolic_pressure = serializers.FloatField(write_only=True)
     diastolic_pressure = serializers.FloatField(write_only=True)
+    creation_date = serializers.DateField(write_only=True)
 
 
 class PulseRateSerializer(serializers.Serializer):
@@ -33,20 +35,24 @@ class PulseRateSerializer(serializers.Serializer):
 
     pulse_rate = serializers.FloatField(write_only=True)
     pulse_on_exertion = serializers.CharField(write_only=True)
+    creation_date = serializers.DateField(write_only=True)
+
 
 class BloodSaturationSerializer(serializers.Serializer):
 
     """Blood saturation serializer"""
 
     blood_saturation = serializers.FloatField(write_only=True)
+    creation_date = serializers.DateField(write_only=True)
 
 
 class RespiratoryRateSerializer(serializers.Serializer):
     
-    """Respiratory serializer"""
+    """Respiratory rate serializer"""
 
     respiratory_rate = serializers.FloatField(write_only=True)
     breathing_rhythm = serializers.CharField(write_only=True)
+    creation_date = serializers.DateField(write_only=True)
 
 
 class RespiratoryConditionSerializer(serializers.Serializer):
@@ -55,6 +61,7 @@ class RespiratoryConditionSerializer(serializers.Serializer):
     
     moist_rales = serializers.BooleanField(write_only=True)
     peripheral_edema = serializers.BooleanField(write_only=True)
+    creation_date = serializers.DateField(write_only=True)
     
 
 class DyspneaSerializer(serializers.Serializer):
@@ -63,6 +70,7 @@ class DyspneaSerializer(serializers.Serializer):
 
     dyspnea = serializers.BooleanField(write_only=True)
     dyspnea_type = serializers.CharField(write_only=True)
+    creation_date = serializers.DateField(write_only=True)
     
     
 class FatiueSerializer(serializers.Serializer):
@@ -71,6 +79,7 @@ class FatiueSerializer(serializers.Serializer):
 
     fatigue = serializers.BooleanField(write_only=True)
     fatigue_type = serializers.CharField(write_only=True)
+    creation_date = serializers.DateField(write_only=True)
 
 
 class HeartPainSerializer(serializers.Serializer):
@@ -79,6 +88,7 @@ class HeartPainSerializer(serializers.Serializer):
 
     heart_pain = serializers.BooleanField(write_only=True)
     heart_pain_type = serializers.CharField(write_only=True)
+    creation_date = serializers.DateField(write_only=True)
 
 
 class PhysicalActivitySerializer(serializers.Serializer):
@@ -89,4 +99,5 @@ class PhysicalActivitySerializer(serializers.Serializer):
     walking_duration = serializers.FloatField(write_only=True)
     distance_covered = serializers.FloatField(write_only=True)
     step_count = serializers.FloatField(write_only=True)
-    bord_scale = serializers.IntegerField(write_only=True)
+    borg_scale = serializers.IntegerField(write_only=True)
+    creation_date = serializers.DateField(write_only=True)

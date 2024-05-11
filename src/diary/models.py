@@ -14,7 +14,7 @@ class HealthDiaryRecord(models.Model):
         verbose_name=_("ER Card"), to="er_card.ElectronicRehabilitationCard",
         on_delete=models.CASCADE, related_name="records"
     )
-    creation_date = models.DateField(verbose_name=_("Creation Date"), auto_now_add=True, unique=True)
+    creation_date = models.DateField(verbose_name=_("Creation Date"))
 
     # <-----Physical indicators-----> #
 
@@ -73,6 +73,8 @@ class HealthDiaryRecord(models.Model):
     class Meta:
         verbose_name = _("Health Diary Record")
         verbose_name_plural = _("Health Diary Records")
+        unique_together = ['er_card', 'creation_date']
+        
         
 
 
