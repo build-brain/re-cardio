@@ -28,11 +28,11 @@ class HealthDiaryRecordViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = HealthDiaryRecord.objects.all()
     serializer_class = HealthDiaryRecordSerializer
     
-    def get_er_card(self, request):
+    def get_er_card(self):
         
         # Проверяем пользователя
         user = self.request.user
-        if user.user_type != "PATIENT":
+        if user.is_anonymous or user.user_type != "PATIENT":
             raise serializers.ValidationError({"error": _("User is not a patient.")})
         
         # Достаем электронную карту реабилитации
