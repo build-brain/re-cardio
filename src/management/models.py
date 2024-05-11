@@ -13,7 +13,7 @@ from solo.models import SingletonModel
 from .choices import *
 from .managers import UserManager
 from .services.tasks import send_verify_code, send_password
-from .utils import get_passport_path, get_file_path
+from .utils import get_file_path
 
 
 class User(AbstractUser, PermissionsMixin):
@@ -27,7 +27,6 @@ class User(AbstractUser, PermissionsMixin):
     birth_date = models.DateField(verbose_name=_("Birth date"), default=date(1900, 1, 1))
     pinfl = models.CharField(verbose_name=_("PINFL"), max_length=14)
     passport = models.CharField(verbose_name=_("Passport serial and number"), max_length=9, null=True, blank=True)
-    passport_attachment = models.FileField(verbose_name=_("Passport attachment"), upload_to=get_passport_path, null=True, blank=True)
     additional_information = models.TextField(verbose_name=_("Additional information"), null=True, blank=True)
 
     verify_code = models.PositiveSmallIntegerField(verbose_name=_("Verify Code"), default=0)
@@ -185,9 +184,9 @@ class District(models.Model):
         return self.name
 
 
-class AttachedFile(models.Model):
+class PatientAttachment(models.Model):
 
-    """Attached File model"""
+    """Patient attachment model"""
 
     patient = models.ForeignKey(verbose_name=_("Patient"), to=Patient, related_name='attachments',on_delete=models.CASCADE)
     title = models.CharField(verbose_name=_("Title"), max_length=90)

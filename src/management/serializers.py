@@ -2,7 +2,14 @@ from django.utils.translation import gettext_lazy as _
 
 from rest_framework import serializers
 
-from src.management.models import *
+from src.management.models import (
+    User,
+    Admin,
+    Doctor,
+    Patient,
+    District,
+    PatientAttachment
+)
 
 
 class ProfileMeta:
@@ -11,7 +18,8 @@ class ProfileMeta:
 
 
 class UserSerializer(serializers.ModelSerializer):
-    """ """
+    
+    """User model serializer"""
 
     class Meta(ProfileMeta):
         model = User
@@ -19,65 +27,100 @@ class UserSerializer(serializers.ModelSerializer):
 
 
 class ChangeAvatarSerializer(serializers.Serializer):
-    """ """
+    
+    """Change avatar serializer"""
+    
     avatar = serializers.ImageField()
 
 
 class ChangePasswordSerializer(serializers.Serializer):
-    """ """
+    
+    """Change password serializer"""
+    
     password = serializers.CharField(write_only=True)
     new_password = serializers.CharField(write_only=True)
     confirm_password = serializers.CharField(write_only=True)
 
 
 class PhoneSerializer(serializers.Serializer):
+
+    """Phone serializer"""
+
     phone = serializers.CharField(required=True)
 
 
 class VerifySerializer(serializers.Serializer):
+    
+    """Verify serializer"""
+
     phone = serializers.CharField()
     code = serializers.IntegerField()
 
 
 class AdminSerializer(serializers.ModelSerializer):
-    """ """
+
+    """Admin model serializer"""
 
     class Meta(UserSerializer.Meta):
         model = Admin
 
 
 class MeAdminSerializer(serializers.ModelSerializer):
+
+    """Me admin model serializer"""
+
     class Meta(ProfileMeta):
         model = Admin
 
 
 class DoctorSerializer(serializers.ModelSerializer):
-    """ """
+
+    """Doctor model serializer"""
 
     class Meta(UserSerializer.Meta):
         model = Doctor
 
 
-
 class MeDoctorSerializer(serializers.ModelSerializer):
+    
+    """Me doctor model serializer"""
+
     class Meta(ProfileMeta):
         model = Doctor
 
 
+class PatientAttachmentSerializer(serializers.ModelSerializer):
+    
+    """Patient attachment model serializer"""
+
+    class Meta:
+        model = PatientAttachment
+        fields = '__all__'
+
+
 class PatientSerializer(serializers.ModelSerializer):
-    """ """
-    admission_data = serializers.PrimaryKeyRelatedField(many=True, read_only=True)
+
+    """Patient model serializer"""
+    
+    attachments = PatientAttachmentSerializer(many=True, read_only=True)
+    
     class Meta(ProfileMeta):
         model = Patient
-        read_only_fields = ProfileMeta.read_only_fields + ["admission_data"]
+        read_only_fields = ProfileMeta.read_only_fields
 
 
 class MePatientSerializer(serializers.ModelSerializer):
+    
+    """Me patient model serializer"""
+    
     class Meta(ProfileMeta):
         model = Patient
 
 
 class DistrictSerializer(serializers.ModelSerializer):
+    
+    """District model serializer"""
+    
     class Meta:
         model = District
         fields = '__all__'
