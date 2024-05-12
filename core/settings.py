@@ -130,7 +130,7 @@ REST_FRAMEWORK = {
 SIMPLE_JWT = {
     "ACCESS_TOKEN_LIFETIME": timezone.timedelta(hours=1),
     "REFRESH_TOKEN_LIFETIME": timezone.timedelta(days=1),
-    "TOKEN_OBTAIN_SERIALIZER": "api.serializers.CustomTokenObtainPairSerializer"
+    "TOKEN_OBTAIN_SERIALIZER": "src.serializers.CustomTokenObtainPairSerializer"
 }
 
 CORS_ORIGIN_ALLOW_ALL = True
