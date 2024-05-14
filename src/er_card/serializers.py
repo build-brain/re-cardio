@@ -81,7 +81,7 @@ class ConditionAssessmentSheetSerializer(serializers.ModelSerializer):
     
     """Condition assessment sheet model serializer"""
 
-    complications = ComplicationSerializer(many=True, read_only=True)
+    complications = ComplicationSerializer(many=True)
 
     class Meta:
         model = ConditionAssessmentSheet

@@ -30,6 +30,13 @@ class ElectronicRehabilitationCard(models.Model):
     def is_archive(self):
         if not self.is_active:
             return True
+    
+    
+class Event(models.Model):
+
+    """Event model"""
+
+    pass
 
 
 class ERCardAttachment(models.Model):
