@@ -124,7 +124,7 @@ class ConditionAssessmentSheet(models.Model):
     
     complications = models.ManyToManyField(
         verbose_name=_("Complications"), to='Complication',
-        related_name='ca_sheets', blank=True
+        related_name='ca_sheets'
     )
 
     # <-----GRACE Scale-----> #
