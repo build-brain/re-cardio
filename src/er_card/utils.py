@@ -9,7 +9,7 @@ def calculate_grace_score(instance) -> int:
     
     """Calculates grace score"""
     
-    score = 0
+    # Объявление переменных
     age = instance.er_card.patient.age
     pulse_rate = instance.pulse_rate
     systolic_pressure = instance.systolic_pressure
@@ -19,6 +19,8 @@ def calculate_grace_score(instance) -> int:
     st_elevation = instance.st_segment_elevation
     t_inversion = instance.t_wave_inversion
     killip = instance.killip
+
+    score = 0
     
     # Возраст (лет)
     if (age < 30):
@@ -93,7 +95,7 @@ def calculate_grace_score(instance) -> int:
         score += 0
         
     # Отклонение сегмента ST
-    if (st_elevation and t_inversion):
+    if (st_elevation or t_inversion):
         score += 28
     else:
         score += 0
@@ -154,17 +156,16 @@ def calculate_patient_severity_class(instance):
     
     """Calculates patient severity class"""
 
-    selected_cad = instance.coronary_insufficiency       
+    selected_cad = instance.coronary_insufficiency
     selected_myocardial_damage = instance.myocardium_damage
     complications = instance.complications.all()
-    complications_group = complications.first().group
 
     # Подсчет активных осложнений в каждой группе
     first_group_sum = 0
     second_group_sum = 0
     third_group_sum = 0
 
-    match complications_group:
+    match complications.first().group:
         case 1:
             for _ in complications:
                 first_group_sum += 1
@@ -207,5 +208,5 @@ def calculate_patient_severity_class(instance):
                 return 3  # Класс III
             return 4  # Класс IV
 
-        return None  # Если класс не может быть определен
+        return 0  # Если класс не может быть определен
         

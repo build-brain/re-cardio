@@ -58,7 +58,7 @@ class ElectronicRehabilitationCardSerializer(serializers.ModelSerializer):
 
     patient_avatar = serializers.ImageField(source="patient.avatar", read_only=True)
     patient_first_name = serializers.ReadOnlyField(source="patient.first_name")
-    patient_last_name = serializers.ReadOnlyField(source="patient.second_name")
+    patient_last_name = serializers.ReadOnlyField(source="patient.last_name")
     patient_middle_name = serializers.ReadOnlyField(source="patient.middle_name")
     admission_data = AdmissionDataSerializer(read_only=True)
     attachments = ERCardAttachmentSerializer(many=True, read_only=True)

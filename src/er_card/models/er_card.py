@@ -19,6 +19,8 @@ class ElectronicRehabilitationCard(models.Model):
         on_delete=models.SET_NULL, related_name='er_cards', null=True
     )
     is_active = models.BooleanField(verbose_name=_("Is active"), default=True)
+
+    activity_stage = models.PositiveSmallIntegerField(verbose_name=_("Stage of motor activity"))
     created_at = models.DateTimeField(verbose_name=_("Create date"), auto_now_add=True)
     updated_at = models.DateTimeField(verbose_name=_("Update date"), auto_now=True)
     
@@ -33,19 +35,35 @@ class ElectronicRehabilitationCard(models.Model):
     
     
 class Event(models.Model):
-
+    
     """Event model"""
 
-    pass
+    er_card = models.ForeignKey(
+        verbose_name=_("ER card"), to=ElectronicRehabilitationCard,
+        on_delete=models.CASCADE, related_name='events'
+    )
+    title = models.CharField(verbose_name=_("Event title"), max_length=255)
+    type = models.CharField(verbose_name=_("Event type"), max_length=20, choices=EventTypeChoices)
+    location = models.CharField(verbose_name=_("Event location"), max_length=20, choices=EventLocationChoices)
+    start_date = models.DateTimeField(verbose_name=_("Event start date"))
+    end_date = models.DateTimeField(verbose_name=_("Event end date"))
+    description = models.TextField(verbose_name=_("Additional description"))
+
+    class Meta:
+        verbose_name = _("Event")
+        verbose_name_plural = _("Events")
 
 
 class ERCardAttachment(models.Model):
 
     """Attached File model"""
 
-    er_card = models.ForeignKey(verbose_name=_("Electronic Rehabilitation Card"), to=ElectronicRehabilitationCard, related_name='attachments',on_delete=models.CASCADE)
+    er_card = models.ForeignKey(
+        verbose_name=_("Electronic Rehabilitation Card"), to=ElectronicRehabilitationCard, 
+        related_name='attachments',on_delete=models.CASCADE
+    )
     title = models.CharField(verbose_name=_("Title"), max_length=90)
-    attachment = models.FileField(verbose_name=_("Attachment"), upload_to=get_file_path, max_length=255)
+    attachment = models.FileField(verbose_name=_("Attachment"), upload_to=get_file_path)
 
     class Meta:
         verbose_name = _("ER Card attachment")
@@ -62,16 +80,28 @@ class AdmissionData(models.Model):
     
     admission_date = models.DateTimeField(verbose_name=_("Admission date"), unique=True)
     delivery_time = models.DurationField(verbose_name=_("Delivery time"), null=True, blank=True)
-    patient_condition = models.CharField(verbose_name=_("Patient condition"), max_length=30, choices=ConditionChoices.choices, null=True, blank=True)
+    patient_condition = models.CharField(
+        verbose_name=_("Patient condition"), max_length=30, 
+        choices=ConditionChoices.choices, null=True, blank=True
+    )
     patient_complaints = models.TextField(verbose_name=_("Patient complaints"), null=True, blank=True)
     heart_stopped = models.BooleanField(verbose_name=_("Heart stopped"), default=False)
     
     # <-----Preliminary diagnosis-----> #
     
     hospitalization_date = models.DateField(_("Hospitalization date"))
-    hospitalization_type = models.CharField(verbose_name=_("Hospitalization type"), max_length=15, choices=HospitalizationTypeChoices.choices)
-    preliminary_diagnosis = models.ForeignKey(verbose_name=_("Preliminary diagnosis"), to="InternationalClassificationOfDiseases", on_delete=models.SET_NULL, related_name='er_cards', null=True)
-    diagnosed_by = models.CharField(verbose_name=_("Diagnosed by"), max_length=50, choices=DiagnosedByTypeChoices.choices, null=True, blank=True)
+    hospitalization_type = models.CharField(
+        verbose_name=_("Hospitalization type"), max_length=15,
+        choices=HospitalizationTypeChoices.choices
+    )
+    preliminary_diagnosis = models.ForeignKey(
+        verbose_name=_("Preliminary diagnosis"), to="InternationalClassificationOfDiseases", 
+        on_delete=models.SET_NULL, related_name='er_cards', null=True
+    )
+    diagnosed_by = models.CharField(
+        verbose_name=_("Diagnosed by"), max_length=50, 
+        choices=DiagnosedByTypeChoices.choices, null=True, blank=True
+    )
     additional_information = models.TextField(verbose_name=_("Additional information"), null=True, blank=True)
         
     class Meta:
@@ -83,9 +113,12 @@ class AdmissionAttachment(models.Model):
 
     """Admission attachment model"""
 
-    admission_data = models.ForeignKey(verbose_name=_("Electronic Rehabilitation Card"), to=AdmissionData, related_name='attachments',on_delete=models.CASCADE)
+    admission_data = models.ForeignKey(
+        verbose_name=_("Electronic Rehabilitation Card"), to=AdmissionData,
+        related_name='attachments',on_delete=models.CASCADE
+    )
     title = models.CharField(verbose_name=_("Title"), max_length=90)
-    attachment = models.FileField(verbose_name=_("Attachment"), upload_to=get_file_path, max_length=255)
+    attachment = models.FileField(verbose_name=_("Attachment"), upload_to=get_file_path)
 
     class Meta:
         verbose_name = _("Admission attachment")

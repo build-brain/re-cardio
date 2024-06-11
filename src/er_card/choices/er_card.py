@@ -50,3 +50,15 @@ class PatientSeverityClassChoices(models.IntegerChoices):
     IV_CLASS = 4, _('IV class')
     
 
+class EventTypeChoices(models.TextChoices):
+    
+    """Тип событий"""
+
+    pass
+
+
+class EventLocationChoices(models.TextChoices):
+    
+    """Местополжение событий"""
+
+    pass

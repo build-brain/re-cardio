@@ -144,6 +144,16 @@ class ACSCharacteristicsChoices(models.TextChoices):
     MI_WITHOUT_Q_WAVE = 'mi_without_q_wave', _('Myocardial Infarction without Q wave')
     # ИМ с зубцом Q
     MI_WITH_Q_WAVE = 'mi_with_q_wave', _('Myocardial Infarction with Q wave')
+
+    
+class RevascularizationTypeChoices(models.IntegerChoices):
+    
+    """Тип реваскуляризации"""
+
+    # Неполная реваскуляризация 
+    INCOMPLETED = 0, _("Incompleted") 
+    # Полная реваскуляризация
+    COMPLETED = 1, _("Completed")
     
     
 class CoronaryLesionDegreeChoices(models.TextChoices):
@@ -206,6 +216,8 @@ class RiskTypeChoices(models.TextChoices):
     MEDIUM = 'medium', _('Medium')
     # Высокий
     HIGH = 'high', _('High')
+    # Неизвестный
+    UNKNOWN = 'unknown', _('Unknown')
 
     
 class ComplicationGroupChoices(models.IntegerChoices):

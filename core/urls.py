@@ -2,17 +2,14 @@ from django.conf import settings
 from django.urls import path, include
 from django.contrib import admin
 from django.conf.urls.static import static
+from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 
 from src.urls import router
 from src.views import LogoutView
 
-from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
-from rest_framework_simplejwt.views import (
-    TokenObtainPairView,
-    TokenRefreshView,
-)
 from rest_framework import permissions
 from drf_yasg import openapi, views
+
 
 schema_view = views.get_schema_view(
     openapi.Info(

@@ -1,4 +1,7 @@
-from rest_framework import viewsets
+from django.core.exceptions import ObjectDoesNotExist
+
+from rest_framework import viewsets, status
+from rest_framework.response import Response
 
 from drf_yasg.utils import swagger_auto_schema
 
@@ -26,7 +29,7 @@ class ElectronicRehabilitationCardViewSet(viewsets.ModelViewSet):
 
     """Electronic rehabilitation card model view set"""
     
-    queryset = ElectronicRehabilitationCard.objects.all()
+    queryset = ElectronicRehabilitationCard.objects.all().select_related('patient')
     serializer_class = ElectronicRehabilitationCardSerializer
 
 
@@ -63,7 +66,7 @@ class ERCardAttachmentViewSet(viewsets.ModelViewSet):
     
 
 class ComplicationViewSet(viewsets.ModelViewSet):
-    
+        
     """Complication model view set"""
     
     queryset = Complication.objects.all()
@@ -76,4 +79,11 @@ class ConditionAssessmentSheetViewSet(viewsets.ModelViewSet):
 
     queryset = ConditionAssessmentSheet.objects.all()
     serializer_class = ConditionAssessmentSheetSerializer
+
+    def create(self, request, *args, **kwargs):
+        try:
+            return super().create(request, *args, **kwargs)
+        except ObjectDoesNotExist:
+            error_message = "No admission data, GRACE requires admission_data"
+            return Response({"error": error_message}, status=status.HTTP_400_BAD_REQUEST)
         
