@@ -5,8 +5,6 @@ from rest_framework import viewsets, status
 from rest_framework.decorators import action
 from rest_framework.response import Response
 
-from drf_yasg.utils import swagger_auto_schema
-
 from src.management.models import (
     User,
     Admin,
